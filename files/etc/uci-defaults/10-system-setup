@@ -12,19 +12,19 @@ msg() {
 # Step 1: Configure profile Dashboard
 msg "Step 1: Configure profile Dashboard"
 sed -i 's/\[ -f \/etc\/banner \] && cat \/etc\/banner/#&/' /etc/profile
-sed -i 's/\[ -n "$FAILSAFE" \] && cat \/etc\/banner.failsafe/& || \/usr\/bin\/rtawrt/' /etc/profile
+sed -i 's/\[ -n "$FAILSAFE" \] && cat \/etc\/banner.failsafe/& || \/usr\/bin\/AirOs/' /etc/profile
 echo "clear1() {
   clear
 }
 alias clear1='clear1'" >> /etc/profile
-echo "alias clear='/usr/bin/rtawrt'" >> /etc/profile
-sed -i "s#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' / ':'')+(luciversion||''),#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' build by RTA-WRT [Ouc3kNF6]':''),#g" /www/luci-static/resources/view/status/include/10_system.js
+echo "alias clear='/usr/bin/AirOs'" >> /etc/profile
+sed -i "s#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' / ':'')+(luciversion||''),#_('Firmware Version'),(L.isObject(boardinfo.release)?boardinfo.release.description+' 尸尺ㄖ丿🝗⼕〸 ᗪ🝗丂ㄖ':''),#g" /www/luci-static/resources/view/status/include/10_system.js
 mv /www/luci-static/resources/view/status/include/29_temp.js /www/luci-static/resources/view/status/include/17_temp.js
 
 
 # Step 2: Configure Password Login OpenWrt
 msg "Step 2: Configure Password Login OpenWrt"
-(echo "rtawrt"; sleep 1; echo "rtawrt") | passwd > /dev/null
+(echo "airos"; sleep 1; echo "airos") | passwd > /dev/null
 
 
 # Step 3: Add Custom Repo and Disable opkg signature check
@@ -56,7 +56,6 @@ check_permission() {
 
 check_permission "/etc/init.d"
 check_permission "/etc/mihomo"
-check_permission "/etc/openclash"
 check_permission "/lib/netifd"
 check_permission "/lib/wifi"
 check_permission "/sbin"

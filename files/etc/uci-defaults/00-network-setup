@@ -38,10 +38,10 @@ uci set network.wan.metric='1'
 uci del network.wan6
 
 # Tethering interface
-uci set network.tethering=interface
-uci set network.tethering.proto='dhcp'
-uci set network.tethering.device='usb0'
-uci set network.tethering.metric='2'
+uci set network.modemhp=interface
+uci set network.modemhp.proto='dhcp'
+uci set network.modemhp.device='usb0'
+uci set network.modemhp.metric='2'
 
 # Step 3: Configure Firewall Zones and Forwarding
 msg "Step 3: Configure Firewall Zones and Forwarding"
@@ -53,7 +53,7 @@ uci set firewall.@zone[1].output='ACCEPT'
 uci set firewall.@zone[1].forward='REJECT'
 uci set firewall.@zone[1].masq='1'
 uci set firewall.@zone[1].mtu_fix='1'
-uci set firewall.@zone[1].network='wan modemmanager tethering'
+uci set firewall.@zone[1].network='wan modemmanager modemhp'
 
 # Forwarding from LAN to WAN
 uci set firewall.@forwarding[0]=forwarding

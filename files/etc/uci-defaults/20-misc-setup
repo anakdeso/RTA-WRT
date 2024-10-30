@@ -39,15 +39,6 @@ uci set xmm-modem.@xmm-modem[0].enable='0'
 uci commit xmm-modem
 
 
-# Step 6: Setup Nlbwmon Database Dir
-msg "Step 6: Setup Nlbwmon Database Dir"
-uci set nlbwmon.@nlbwmon[0].database_directory='/etc/nlbwmon'
-uci set nlbwmon.@nlbwmon[0].commit_interval='3h'
-uci set nlbwmon.@nlbwmon[0].refresh_interval='60s'
-uci commit nlbwmon
-bash /etc/init.d/nlbwmon restart
-
-
 # Step 7: Setup Auto Vnstat Database Backup
 msg "Step 7: Setup Auto Vnstat Database Backup"
 sed -i 's/;DatabaseDir "\/var\/lib\/vnstat"/DatabaseDir "\/etc\/vnstat"/' /etc/vnstat.conf
@@ -56,32 +47,11 @@ chmod +x /etc/init.d/vnstat_backup
 bash /etc/init.d/vnstat_backup enable
 
 
-# Step 8: Adjusting App Catagory
-msg "Step 8: Adjusting App Catagory"
-sed -i -E "s|status|services|g" /usr/lib/lua/luci/controller/base64.lua
-
-
-# Step 9: Configurating OpenClash
-msg "Step 9: Configurating OpenClash"
-bash /usr/bin/patchoc.sh
-sed -i '/exit 0/i #/usr/bin/patchoc.sh' /etc/rc.local
-ln -s /etc/openclash/history/config-wrt.db /etc/openclash/cache.db
-ln -s /etc/openclash/core/clash_meta  /etc/openclash/clash
-
-
 # Step 10: Adding New Line For Enable i2c Oled Display if Devices Supported
 msg "Step 10: Adding New Line For Enable i2c Oled Display if Devices Supported"
 if grep -q "Raspberry Pi 4\|Raspberry Pi 3" /proc/cpuinfo; then
     echo -e "\ndtparam=i2c1=on\ndtparam=spi=on\ndtparam=i2s=on" >> /boot/config.txt
 fi
-
-
-# Step 11: Setup PHP And PhpMyAdmni
-msg "Step 11: Setup PHP And PhpMyAdmni"
-ln -s /usr/bin/php-cli /usr/bin/php
-mv /www/phpmyadmin/config.sample.inc.php /www/phpmyadmin/config.inc.php
-sed -i -E "s|localhost|127.0.0.1|g" /www/phpmyadmin/config.inc.php
-sed -i "/\$cfg\['Servers'\]\[.*\]\['AllowNoPassword'\] = false;/a \$cfg\['AllowThirdPartyFraming'\] = true;" /www/phpmyadmin/config.inc.php
 
 
 # Step 12: Setting Tinyfm

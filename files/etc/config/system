@@ -1,5 +1,5 @@
 config system
-	option hostname 'RTA-WRT'
+	option hostname 'AirOs'
 	option timezone 'WIB-7'
 	option ttylogin '0'
 	option log_size '64'

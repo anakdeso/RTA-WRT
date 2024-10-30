@@ -36,27 +36,12 @@ echo "Downloading custom script"
 sync_time="https://raw.githubusercontent.com/frizkyiman/auto-sync-time/main/sbin/sync_time.sh"
 clock="https://raw.githubusercontent.com/frizkyiman/auto-sync-time/main/usr/bin/clock"
 repair_ro="https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install2.sh"
-mount_hdd="https://raw.githubusercontent.com/frizkyiman/auto-mount-hdd/main/mount_hdd"
 
 wget --no-check-certificate -nv -P files/sbin "$sync_time"
 wget --no-check-certificate -nv -P files/usr/bin "$clock"
 wget --no-check-certificate -nv -P files/root "$repair_ro"
-wget --no-check-certificate -nv -P files/usr/bin "$mount_hdd"
 
 
 # echo "src/gz custom_arch https://dl.openwrt.ai/latest/packages/$ARCH_3/kiddin9" >> repositories.conf
-
-# setup hotspot
-echo "Downloading files for hotspot" 
-git clone -b "main" "https://github.com/Maizil41/RadiusMonitor.git" "files/usr/share/RadiusMonitor"
-git clone -b "main" "https://github.com/Maizil41/hotspotlogin.git" "files/usr/share/hotspotlogin"
-git clone -b "main" "https://github.com/Maizil41/whatsapp-bot.git" "files/root/whatsapp"
-mv files/root/whatsapp/luci-app-whatsapp-bot/root/root/whatsapp-bot files/root/whatsapp-bot
-rm -rf files/root/whatsapp
-
-wget https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.zip
-unzip phpMyAdmin-5.2.1-all-languages.zip
-rm -rf phpMyAdmin-5.2.1-all-languages.zip
-mv phpMyAdmin-5.2.1-all-languages files/www/phpmyadmin
 
 echo "All custom configuration setup completed!"

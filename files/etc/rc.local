@@ -4,6 +4,4 @@
 # Auto Sinkron Jam dengan Bug #
 # Example Operator XL #
 # /usr/bin/jam.sh bsns.bilibili.tv:80
-# auto hapus chache 8 jam sekali #
-# * */8 * * * /sbin/free.sh
 exit 0

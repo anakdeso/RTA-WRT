@@ -39,22 +39,24 @@ uci set xmm-modem.@xmm-modem[0].enable='0'
 uci commit xmm-modem
 
 
-# Step 7: Setup Auto Vnstat Database Backup
-msg "Step 7: Setup Auto Vnstat Database Backup"
+# Step 6: Setup Auto Vnstat Database Backup
+msg "Step 6: Setup Auto Vnstat Database Backup"
 sed -i 's/;DatabaseDir "\/var\/lib\/vnstat"/DatabaseDir "\/etc\/vnstat"/' /etc/vnstat.conf
 mkdir -p /etc/vnstat
 chmod +x /etc/init.d/vnstat_backup
 bash /etc/init.d/vnstat_backup enable
+chmod +x /www/vnstati/vnstati.sh
 
-
-# Step 10: Adding New Line For Enable i2c Oled Display if Devices Supported
-msg "Step 10: Adding New Line For Enable i2c Oled Display if Devices Supported"
+# Step 7: Adding New Line For Enable i2c Oled Display if Devices Supported
+msg "Step 7: Adding New Line For Enable i2c Oled Display if Devices Supported"
 if grep -q "Raspberry Pi 4\|Raspberry Pi 3" /proc/cpuinfo; then
     echo -e "\ndtparam=i2c1=on\ndtparam=spi=on\ndtparam=i2s=on" >> /boot/config.txt
 fi
 
+# step 8 : auto sinkron jam 
+chmod +x /usr/bin/jam.sh
 
-# Step 12: Setting Tinyfm
+# Step 9: Setting Tinyfm
 msg "Step 12: Setting Tinyfm"
 ln -s / /www/tinyfm/rootfs
 

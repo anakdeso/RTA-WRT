@@ -34,8 +34,8 @@ echo "src/gz custom_arch https://dl.openwrt.ai/latest/packages/$(grep "OPENWRT_A
 
 
 # Step 4: Set Material as default theme
-msg "Step 4: Set Material as default theme"
-uci set luci.main.mediaurlbase='/luci-static/material'
+msg "Step 4: Set default theme"
+uci set luci.main.mediaurlbase='/luci-static/alpha'
 uci commit luci
 
 
